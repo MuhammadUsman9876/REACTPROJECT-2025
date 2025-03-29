@@ -9,8 +9,8 @@ const JobListings = ({ isHome = false }) => {
   useEffect(() => {
     const fetchJobs = async () => {
       const apiUrl = isHome
-        ? 'https://reactproject-2025-production.up.railway.app/jobs?_limit=3'
-        : 'https://reactproject-2025-production.up.railway.app/jobs';
+         ? 'http://localhost:5000/jobs?_limit=3' 
+         : 'http://localhost:5000/jobs';
 
       try {
         const res = await fetch(apiUrl);
