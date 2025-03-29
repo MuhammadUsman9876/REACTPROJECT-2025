@@ -9,55 +9,43 @@ import EditJobPage from './Pages/EditJobPage';
 
 const App = () => {
   // ✅ Improved Add Job Function
+  const API_BASE_URL = "https://reactproject-2025-production.up.railway.app";
   const addJob = async (jobData) => {
     try {
-      const res = await fetch('api/jobs', {  
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const res = await fetch(`${API_BASE_URL}/jobs`, {  
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(jobData),
       });
-
-      if (!res.ok) throw new Error('Failed to add job');
-
-      const data = await res.json();  
-      return data;
+  
+      if (!res.ok) throw new Error("Failed to add job");
+      return await res.json();
     } catch (error) {
-      console.error('Error adding job:', error);
+      console.error("Error adding job:", error);
     }
   };
-
-  // ✅ Improved Delete Job Function
+  
+  // ✅ Update Delete Job function
   const deleteJob = async (id) => {
     try {
-      const res = await fetch(`/api/jobs/${id}`, {  // 🔹 Use full URL in development
-        method: 'DELETE',
-      });
-
-      if (!res.ok) throw new Error('Failed to delete job');
+      const res = await fetch(`${API_BASE_URL}/jobs/${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error("Failed to delete job");
     } catch (error) {
-      console.error('Error deleting job:', error);
+      console.error("Error deleting job:", error);
     }
   };
-  //Update Job
+  
+  // ✅ Update Update Job function
   const updateJob = async (job) => {
     try {
-      const res = await fetch(`/api/jobs/${job.id}`, {  // ✅ Fixed API URL
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const res = await fetch(`${API_BASE_URL}/jobs/${job.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(job),
       });
-  
-      if (!res.ok) throw new Error('Failed to update job');
-  
-      const data = await res.json();  // ✅ Parse response
-      return data;  // ✅ Return updated job data
+      if (!res.ok) throw new Error("Failed to update job");
     } catch (error) {
-      console.error('Error updating job:', error);
-      return null;  // ✅ Return null on failure
+      console.error("Error updating job:", error);
     }
   };
   
