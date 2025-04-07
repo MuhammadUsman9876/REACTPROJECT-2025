@@ -8,7 +8,7 @@ const JobListings = ({ isHome = false }) => {
 
   useEffect(() => {
     const fetchJobs = async () => {
-      const baseUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api/jobs';
+      const baseUrl = import.meta.env.VITE_API_URL;
 
       const apiUrl = isHome 
               ? `${baseUrl}/jobs?_limit=3`
