@@ -117,11 +117,16 @@ const JobPage = ({deleteJob}) => {
     
   )
 }
-const jobLoader = async ({params}) => {
-    const res = await fetch(`https://reactproject-2025-production.up.railway.app/api/jobs/${params.id}`)
-    const data = await res.json();
-    return data;
-    
-}
+const jobLoader = async ({ params }) => {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+  const res = await fetch(`${API_BASE_URL}/jobs/${params.id}`);
+  
+  if (!res.ok) {
+    throw new Error("Job not found");
+  }
+
+  const data = await res.json();
+  return data;
+};
 
 export {JobPage as default , jobLoader }

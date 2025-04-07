@@ -83,6 +83,20 @@
         "contactEmail": "contact@ipsumlorem.com",
         "contactPhone": "555-555-5555"
       }
+    },
+    {
+      "id": "bdf7",
+      "title": "Software Engineer",
+      "type": "Full-Time",
+      "location": "New York",
+      "description": "Develop and maintain software systems.",
+      "salary": "$50K - 60K",
+      "company": {
+        "name": "Tech Corp",
+        "description": "A leading tech company",
+        "contactEmail": "contact@techcorp.com",
+        "contactPhone": "123-456-7890"
+      }
     }
   ]
 }

@@ -8,9 +8,11 @@ const JobListings = ({ isHome = false }) => {
 
   useEffect(() => {
     const fetchJobs = async () => {
-      const apiUrl = isHome
-         ? 'https://reactproject-2025-production.up.railway.app/?_limit=3' 
-         : 'https://reactproject-2025-production.up.railway.app/';
+      const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+
+      const apiUrl = isHome 
+              ? `${baseUrl}/jobs?_limit=3`
+              : `${baseUrl}/jobs`;
 
       try {
         const res = await fetch(apiUrl);

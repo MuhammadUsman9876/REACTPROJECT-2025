@@ -9,21 +9,31 @@ import EditJobPage from './Pages/EditJobPage';
 
 const App = () => {
   // ✅ Improved Add Job Function
-  const API_BASE_URL = "https://reactproject-2025-production.up.railway.app";
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+
   const addJob = async (jobData) => {
     try {
-      const res = await fetch(`${API_BASE_URL}/jobs`, {  
+      const res = await fetch(`${API_BASE_URL}/jobs`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(jobData),
       });
   
-      if (!res.ok) throw new Error("Failed to add job");
-      return await res.json();
+      if (!res.ok) {
+        throw new Error("Failed to add job");
+      }
+  
+      const data = await res.json();
+      if (!data) throw new Error("API returned an empty response");
+  
+      return data;  // Return the added job data
     } catch (error) {
       console.error("Error adding job:", error);
+      toast.error("Failed to add job", { autoClose: 1000 });
     }
   };
+  
+  
   
   // ✅ Update Delete Job function
   const deleteJob = async (id) => {
