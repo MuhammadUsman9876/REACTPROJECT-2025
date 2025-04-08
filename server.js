@@ -1,25 +1,17 @@
-// server.js
-const express = require('express');
-const path = require('path');
-const jsonServer = require('json-server');
+import express from 'express';
+import jsonServer from 'json-server';
+import cors from 'cors';
 
 const app = express();
-const PORT = process.env.PORT || 5000;
-
-// JSON Server setup
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
 
-app.use('/api', middlewares, router); // Serve JSON API at /api
+// Enable CORS for all routes
+app.use(cors());
 
-// Serve frontend static files from dist
-app.use(express.static(path.join(__dirname, 'dist')));
+// Add /api prefix to the routes
+app.use('/api', router); // This will now serve /api/jobs, /api/posts, etc.
 
-// Fallback to index.html for frontend routing
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-});
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(5000, () => {
+  console.log('Server running on http://localhost:5000');
 });
